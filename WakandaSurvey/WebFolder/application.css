@@ -1,0 +1,27 @@
+﻿/*
+	This CSS file, which was automatically created by Wakanda, allows you to share CSS styles for all the widgets on the Pages in your project.
+	The CSS styles that are created when you create a Widget Role are placed in this file too.
+*/
+
+
+
+
+.waf-theme.lilac .waf-richText.waf-role-title2 {
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+
+
+.waf-theme.lilac .waf-button.waf-role-rButton {
+	font-size: 13px;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.waf-theme.lilac .waf-richText.waf-role-title1 {
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 22px;
+}
+

@@ -1,0 +1,390 @@
+﻿{
+	"toJSON": true,
+	"extraProperties": {
+		"version": "2",
+		"classes": {
+			"User": {
+				"panelColor": "#eee",
+				"methVisible": "true",
+				"methodInhVisible": "true",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 40,
+						"Y": 47
+					}
+				}
+			},
+			"Survey": {
+				"panelColor": "#B2A2C7",
+				"methVisible": "true",
+				"methodInhVisible": "true",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 46,
+						"Y": 336
+					}
+				}
+			},
+			"Question": {
+				"panelColor": "#fff",
+				"methVisible": "true",
+				"methodInhVisible": "true",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 445,
+						"Y": 405
+					}
+				}
+			},
+			"Response": {
+				"panelColor": "#D8D8D8",
+				"methVisible": "true",
+				"methodInhVisible": "true",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 873,
+						"Y": 469
+					}
+				}
+			},
+			"AnsweredQuestion": {
+				"panelColor": "#B7DDE8",
+				"methVisible": "true",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 495,
+						"Y": 150
+					}
+				},
+				"methodInhVisible": "true"
+			}
+		},
+		"model": {
+			"scriptMode": "manual",
+			"workspaceLeft": 2,
+			"workspaceTop": 0,
+			"methodShowMode": "true",
+			"methodInhShowMode": "true",
+			"lastScriptLocation": {
+				"User": {
+					"computed": "User/User-events.js",
+					"events": "User/User-events.js"
+				},
+				"Survey": {
+					"computed": "Survey/Survey-events.js"
+				},
+				"Question": {
+					"method": "Question/Question-methods.js"
+				}
+			},
+			"relationCurve": {
+				"run": true,
+				"mode": 1
+			}
+		}
+	},
+	"dataClasses": [
+		{
+			"name": "AnsweredQuestion",
+			"className": "AnsweredQuestion",
+			"collectionName": "AnsweredQuestionCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "user",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "User",
+					"path": "User"
+				},
+				{
+					"name": "question",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Question",
+					"path": "Question"
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"className": "Question",
+			"collectionName": "QuestionCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "label",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "multipleResponse",
+					"kind": "storage",
+					"scope": "public",
+					"type": "bool"
+				},
+				{
+					"name": "responses",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "ResponseCollection",
+					"reversePath": true,
+					"path": "question"
+				},
+				{
+					"name": "survey",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Survey",
+					"path": "Survey"
+				},
+				{
+					"name": "answeredQuestions",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "AnsweredQuestionCollection",
+					"reversePath": true,
+					"path": "question"
+				}
+			],
+			"methods": [
+				{
+					"name": "getResponses",
+					"applyTo": "entity",
+					"scope": "public",
+					"from": "$mainModel.Question.entityMethods.getResponses",
+					"userDefined": true
+				}
+			]
+		},
+		{
+			"name": "Response",
+			"className": "Response",
+			"collectionName": "ResponseCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "label",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "chosenCount",
+					"kind": "storage",
+					"scope": "public",
+					"type": "long"
+				},
+				{
+					"name": "question",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Question",
+					"path": "Question"
+				}
+			]
+		},
+		{
+			"name": "Survey",
+			"className": "Survey",
+			"collectionName": "SurveyCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "name",
+					"kind": "storage",
+					"scope": "public",
+					"not_null": true,
+					"type": "string"
+				},
+				{
+					"name": "questions",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "QuestionCollection",
+					"reversePath": true,
+					"path": "survey"
+				},
+				{
+					"name": "beginDate",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "endDate",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "ownerFullName",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.Survey.ownerFullName.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "beginDateUTC",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "long",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.Survey.beginDateUTC.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "endDateUTC",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "long",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.Survey.endDateUTC.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "owner",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "User",
+					"path": "User"
+				}
+			]
+		},
+		{
+			"name": "User",
+			"className": "User",
+			"collectionName": "UserCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "firstName",
+					"kind": "storage",
+					"scope": "public",
+					"not_null": true,
+					"type": "string"
+				},
+				{
+					"name": "lastName",
+					"kind": "storage",
+					"scope": "public",
+					"not_null": true,
+					"type": "string"
+				},
+				{
+					"name": "fullName",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.User.fullName.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "surveyCollection",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "SurveyCollection",
+					"reversePath": true,
+					"path": "owner"
+				},
+				{
+					"name": "answeredQuestions",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "AnsweredQuestionCollection",
+					"reversePath": true,
+					"path": "user"
+				}
+			],
+			"events": [
+				{
+					"kind": "onValidate",
+					"from": "$mainModel.User.events.onValidate",
+					"userDefined": true
+				}
+			]
+		}
+	]
+}
