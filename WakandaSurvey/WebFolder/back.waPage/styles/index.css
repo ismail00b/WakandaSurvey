@@ -4,7 +4,7 @@
 */
 
 #label9 {
-	 z-index: 9;
+	 z-index: 7;
 	 width: 80px;
 	 height: 13px;
 	 top: 64px;
@@ -16,7 +16,7 @@
 }
 
 #label8 {
-	 z-index: 7;
+	 z-index: 6;
 	 width: 80px;
 	 height: 13px;
 	 top: 24px;
@@ -27,30 +27,8 @@
 	 
 }
 
-#dataGrid3 {
-	 z-index: 5;
-	 width: 400px;
-	 top: 140px;
-	 bottom: 65px;
-	 right: 20px;
-	
-	 position: absolute;
-	 
-}
-
-#dataGrid1 {
-	 z-index: 4;
-	 width: 450px;
-	 top: 140px;
-	 bottom: 60px;
-	 left: 20px;
-	
-	 position: absolute;
-	 
-}
-
 #label7 {
-	 z-index: 3;
+	 z-index: 4;
 	 width: 80px;
 	 height: 13px;
 	 top: 20px;
@@ -62,7 +40,7 @@
 }
 
 #label5 {
-	 z-index: 1;
+	 z-index: 12;
 	 width: 80px;
 	 height: 13px;
 	 top: 94px;
@@ -426,7 +404,7 @@
 }
 
 #teBeginDateForEdit {
-	 z-index: 7;
+	 z-index: 6;
 	 width: 130px;
 	 height: 22px;
 	 top: 20px;
@@ -437,7 +415,7 @@
 }
 
 #teEndDateForEdit {
-	 z-index: 9;
+	 z-index: 7;
 	 width: 130px;
 	 height: 22px;
 	 top: 60px;
@@ -448,7 +426,7 @@
 }
 
 #teUserNameForEdit {
-	 z-index: 1;
+	 z-index: 12;
 	 width: 150px;
 	 height: 22px;
 	 top: 90px;
@@ -459,7 +437,7 @@
 }
 
 #teSurveyNameForEdit {
-	 z-index: 3;
+	 z-index: 4;
 	 width: 450px;
 	 height: 50px;
 	 top: 20px;
@@ -481,7 +459,7 @@
 }
 
 #btValidateSurveyEdition {
-	 z-index: 10;
+	 z-index: 8;
 	 width: 100px;
 	 height: 25px;
 	 bottom: 20px;
@@ -492,11 +470,55 @@
 }
 
 #btCancelSurveyEdition {
-	 z-index: 11;
+	 z-index: 9;
 	 width: 100px;
 	 height: 25px;
 	 bottom: 20px;
 	 right: 150px;
+	
+	 position: absolute;
+	 
+}
+
+#btShowList {
+	 z-index: 10;
+	 width: 60px;
+	 height: 20px;
+	 top: 100px;
+	 left: 500px;
+	
+	 position: absolute;
+	 
+}
+
+#btShowStat {
+	 z-index: 11;
+	 width: 60px;
+	 height: 20px;
+	 top: 100px;
+	 left: 500px;
+	
+	 position: absolute;
+	 
+}
+
+#dgResponses {
+	 z-index: 5;
+	 width: 400px;
+	 top: 140px;
+	 bottom: 65px;
+	 right: 20px;
+	
+	 position: absolute;
+	 
+}
+
+#dgQuestions {
+	 z-index: 4;
+	 width: 450px;
+	 top: 140px;
+	 bottom: 60px;
+	 left: 20px;
 	
 	 position: absolute;
 	 

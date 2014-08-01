@@ -32,12 +32,12 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 				'responses': []
 			};
 			
-			for (var questionIter = 0, len = ws.surveyResult.length ; questionIter < len ; ++questionIter) {
+			for (var questionIter = 0, questionLen = ws.surveyResult.length ; questionIter < questionLen ; ++questionIter) {
 				
 				var questionResult = ws.surveyResult[questionIter];
 				var responseID = null;
 				
-				for (var responseIter = 0, len = questionResult.responses.length ; (responseIter < len) && (responseID == null) ; ++responseIter) {
+				for (var responseIter = 0, responseLen = questionResult.responses.length ; (responseIter < responseLen) && (responseID == null) ; ++responseIter) {
 				
 					var rbResponse = document.getElementById( 'rbResponse' + questionResult.responses[responseIter]);
 					if (rbResponse != null) {

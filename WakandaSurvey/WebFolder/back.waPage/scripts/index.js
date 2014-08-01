@@ -2,6 +2,8 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var btShowList = {};	// @button
+	var btShowStat = {};	// @button
 	var dgSurveys = {};	// @dataGrid
 	var btValidateSurveyCreation = {};	// @button
 	var btCancelSurveyEdition = {};	// @button
@@ -12,6 +14,23 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	btShowList.click = function btShowList_click (event)// @startlock
+	{// @endlock
+		$$('btShowStat').show();
+		$$('dgResponses').show();
+		$$('btShowList').hide();
+	//	$$('chStatResponse').hide();
+	};// @lock
+
+	btShowStat.click = function btShowStat_click (event)// @startlock
+	{// @endlock
+		$$('btShowList').show();
+	//	$$('chStatResponse').show();
+		$$('btShowStat').hide();
+		$$('dgResponses').hide();
+		
+	};// @lock
 
 	dgSurveys.onRowDblClick = function dgSurveys_onRowDblClick (event)// @startlock
 	{// @endlock
@@ -85,6 +104,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("btShowList", "click", btShowList.click, "WAF");
+	WAF.addListener("btShowStat", "click", btShowStat.click, "WAF");
 	WAF.addListener("dgSurveys", "onRowDblClick", dgSurveys.onRowDblClick, "WAF");
 	WAF.addListener("btValidateSurveyCreation", "click", btValidateSurveyCreation.click, "WAF");
 	WAF.addListener("btCancelSurveyEdition", "click", btCancelSurveyEdition.click, "WAF");

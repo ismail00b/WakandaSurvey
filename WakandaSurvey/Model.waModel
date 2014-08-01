@@ -50,8 +50,8 @@
 					"isOpen": "true",
 					"pathVisible": true,
 					"position": {
-						"X": 873,
-						"Y": 469
+						"X": 869,
+						"Y": 450
 					}
 				}
 			},
@@ -63,8 +63,8 @@
 					"isOpen": "true",
 					"pathVisible": true,
 					"position": {
-						"X": 495,
-						"Y": 150
+						"X": 550,
+						"Y": 121
 					}
 				}
 			}
@@ -322,7 +322,7 @@
 				{
 					"name": "setUserResult",
 					"applyTo": "entity",
-					"scope": "publicOnServer",
+					"scope": "public",
 					"from": "$mainModel.Survey.entityMethods.setUserResult",
 					"userDefined": true
 				}
@@ -396,5 +396,6 @@
 				}
 			]
 		}
-	]
+	],
+	"type": []
 }
