@@ -1,5 +1,6 @@
 ﻿
 var ws = ws || {};
+ws.surveyResult = [];
 
 
 ws.updateSurveyList = function updateSurveyList( date) {
@@ -20,28 +21,49 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	btValidate.click = function btValidate_click (event)// @startlock
 	{// @endlock
-		for( questionID in ws.surveyResult) {			
-			var questionResult = ws.surveyResult[questionID];
-			for (var iter = 0, len = questionResult.responses.length ; iter < len ; ++iter) {
+		var survey = sources.survey.getCurrentElement();
+		if (survey != null) {
+		
+			var result = {
+				'surveyID': survey.ID.getValue(),
+				'firstName': $$('teFirstName').getValue(),
+				'lastName': $$('teLastName').getValue(),
+				'createUserIfNeed': true,
+				'responses': []
+			};
+			
+			for (var questionIter = 0, len = ws.surveyResult.length ; questionIter < len ; ++questionIter) {
 				
-				var response = questionResult.responses[iter];
-				var rbResponse = document.getElementById( response.elementID);
-				if (rbResponse != null) {
-					if ('checked' in rbResponse) {
-						if (rbResponse.checked) {
-							questionResult.responseID = response.ID;
-							break;
+				var questionResult = ws.surveyResult[questionIter];
+				var responseID = null;
+				
+				for (var responseIter = 0, len = questionResult.responses.length ; (responseIter < len) && (responseID == null) ; ++responseIter) {
+				
+					var rbResponse = document.getElementById( 'rbResponse' + questionResult.responses[responseIter]);
+					if (rbResponse != null) {
+						if (('checked' in rbResponse) && rbResponse.checked) {
+							responseID = questionResult.responses[responseIter];
 						}
 					}
-						
 				}
+					
+				if (responseID != null) {
+					result.responses.push( {
+						'questionID': questionResult.ID,
+						'responseID': responseID
+					} );
+				}
+			}
+			
+			if ((result.responses.length > 0) && (result.firstName !== '') && (result.lastName !== '')) {
+				survey.setUserResult( result);
 			}
 		}
 	};// @lock
 
 	questionsEvent.onCollectionChange = function questionsEvent_onCollectionChange (event)// @startlock
 	{// @endlock
-		var surveyResult = {};
+		ws.surveyResult = [];
 		
 		if (sources.questions.length > 0) {
 			
@@ -53,10 +75,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			// empty the container
 			var lChildNodes = [];
 			for (var iter = 0, len = ctSurveyView.childNodes.length ; iter < len ; ++iter) {
-				var child = ctSurveyView.childNodes[iter];
-				if (child.tagName != 'BUTTON') {
-					lChildNodes.push( child);
-				}
+				lChildNodes.push( ctSurveyView.childNodes[iter]);
 			}
 			lChildNodes.forEach( function (node) {
 				ctSurveyView.removeChild( node);
@@ -74,7 +93,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						'ID': question.ID.getValue(),
 						'responses': []
 					};
-					surveyResult[question.ID.getValue()] = questionResult;					
+					
+					ws.surveyResult.push( questionResult);
 					
 					var ctSurveyView = document.getElementById( 'ctSurveyView');
 					
@@ -108,6 +128,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 							radioButton.setAttribute( 'id', 'rbResponse' + response.ID.getValue());
 							radioButton.setAttribute( 'type', 'radio');
 							radioButton.setAttribute( 'name', radioButtonName);
+							radioButton.setAttribute( 'value', response.ID.getValue());
 							radioButton.setAttribute( 'style', 'width:15px;height:15px');
 							divResponse.appendChild( radioButton);
 							
@@ -119,11 +140,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 							divResponse.appendChild( labelResponse);
 							divQuestion.appendChild( divResponse);
 							
-							questionResult.responses.push( {
-								'ID': response.ID.getValue(),
-								'elementID': 'rbResponse' + response.ID.getValue()
-							} );
-														
+							questionResult.responses.push( response.ID.getValue());
+											
 							divQuestionHeight += responseControlHeight;
 						}
 					} );
@@ -134,19 +152,22 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 					ctSurveyView.appendChild( divQuestion);
 
 					divQuestionHPos += divQuestionHeight;
+					
 				},
+				
         		'onError': function(event) {
 				},
+				
 				atTheEnd: function(event) {
 				}
 			} );
 			
-			divQuestionHPos += 60;
-			
 			ctSurveyView.setAttribute( 'style', 'height:' + divQuestionHPos.toString() + 'px');
+			
+			var ctValidation = document.getElementById( 'ctValidation');
+			var ctSurveyViewBottom = ctSurveyView.offsetTop + ctSurveyView.clientHeight;
+			ctValidation.setAttribute( 'style', 'top:' + ctSurveyViewBottom.toString() + 'px;position:absolute');
 	    }
-	    
-	    ws.surveyResult = surveyResult;
 	};// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock

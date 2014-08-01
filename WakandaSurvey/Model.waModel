@@ -24,8 +24,8 @@
 					"isOpen": "true",
 					"pathVisible": true,
 					"position": {
-						"X": 46,
-						"Y": 336
+						"X": 97,
+						"Y": 398
 					}
 				}
 			},
@@ -58,6 +58,7 @@
 			"AnsweredQuestion": {
 				"panelColor": "#B7DDE8",
 				"methVisible": "true",
+				"methodInhVisible": "true",
 				"panel": {
 					"isOpen": "true",
 					"pathVisible": true,
@@ -65,8 +66,7 @@
 						"X": 495,
 						"Y": 150
 					}
-				},
-				"methodInhVisible": "true"
+				}
 			}
 		},
 		"model": {
@@ -81,7 +81,8 @@
 					"events": "User/User-events.js"
 				},
 				"Survey": {
-					"computed": "Survey/Survey-events.js"
+					"computed": "Survey/Survey-events.js",
+					"method": "Survey/Survey-methods.js"
 				},
 				"Question": {
 					"method": "Question/Question-methods.js"
@@ -315,6 +316,15 @@
 					"scope": "public",
 					"type": "User",
 					"path": "User"
+				}
+			],
+			"methods": [
+				{
+					"name": "setUserResult",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "$mainModel.Survey.entityMethods.setUserResult",
+					"userDefined": true
 				}
 			]
 		},
